@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Real Estate Advisor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Intelligent Real Estate Advisor</h1>
+            <p>Find your ideal property based on your budget and preferences</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="advisor">Property Advisor</button>
+            <button class="tab-btn" data-tab="about">How It Works</button>
+        </div>
+
+        <div class="tab-content active" id="advisor">
+            <div class="content-wrapper">
+                <!-- Input Form -->
+                <div class="form-container">
+                    <h2>Your Preferences</h2>
+                    <p>Enter your financial details and preferences</p>
+                    
+                    <form id="prediction-form">
+                        <div class="form-group">
+                            <label for="annualSalary">Annual Salary (₹)</label>
+                            <input type="number" id="annualSalary" name="annualSalary" placeholder="e.g., 1200000" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bhk">Required BHK</label>
+                            <select id="bhk" name="bhk" required>
+                                <option value="1">1 BHK</option>
+                                <option value="2" selected>2 BHK</option>
+                                <option value="3">3 BHK</option>
+                                <option value="4">4 BHK</option>
+                                <option value="5">5+ BHK</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <select id="city" name="city" required>
+                                <option value="Mumbai" selected>Mumbai</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Kolkata">Kolkata</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preferredLocation">Preferred Location (Optional)</label>
+                            <input type="text" id="preferredLocation" name="preferredLocation" placeholder="e.g., Andheri, Bandra">
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Find Ideal Properties</button>
+                    </form>
+                </div>
+                
+                <!-- Results Display -->
+                <div class="results-container">
+                    <h2>Results & Recommendations</h2>
+                    <p id="results-description">Submit your details to see recommendations</p>
+                    
+                    <div id="loading" class="loading-indicator hidden">
+                        <div class="spinner"></div>
+                        <p>Analyzing data...</p>
+                    </div>
+                    
+                    <div id="results" class="hidden">
+                        <!-- Affordability Meter -->
+                        <div class="affordability-meter">
+                            <div class="meter-header">
+                                <h3>Affordability Analysis</h3>
+                                <span id="affordability-score">Score: 0/10</span>
+                            </div>
+                            <div class="progress-container">
+                                <div id="affordability-progress" class="progress-bar"></div>
+                            </div>
+                            <div class="meter-footer">
+                                <span id="affordability-message"></span>
+                                <span id="max-budget"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="results-grid">
+                            <!-- Price Chart -->
+                            <div class="chart-container">
+                                <h3>Price Prediction</h3>
+                                <canvas id="price-chart"></canvas>
+                            </div>
+                            
+                            <!-- Location Suggestions -->
+                            <div class="suggestions-container">
+                                <h3>Recommended Locations</h3>
+                                <div id="location-suggestions"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="no-results" class="placeholder-content">
+                        <div class="placeholder-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <p>Enter your details and preferences to get personalized property recommendations and price predictions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="about">
+            <div class="about-container">
+                <h2>How Our AI Advisor Works</h2>
+                <p>Understanding the technology behind our recommendations</p>
+                
+                <div class="info-section">
+                    <h3>Machine Learning Model</h3>
+                    <p>Our system uses advanced machine learning algorithms trained on extensive real estate data from across India. The model considers factors like location, amenities, property size, and market trends to predict prices accurately.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Affordability Analysis</h3>
+                    <p>We analyze your financial situation to determine what properties you can realistically afford. Our system follows the standard 30% rule, suggesting that your housing expenses should not exceed 30% of your annual income.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Location Matching</h3>
+                    <p>Based on your preferences and budget constraints, our algorithm identifies neighborhoods that offer the best value. We consider factors like proximity to your preferred location, safety, amenities, and future appreciation potential.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
