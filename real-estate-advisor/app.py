@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """ main page"""
-    return render_template('index.html')
+    return "Real Estate Advisor Running"
 
 @app.route('/api/predict', methods=['POST'])
 def predict():
